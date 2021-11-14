@@ -60,7 +60,41 @@
             <p><strong>Spaces:</strong> {{Lessons.spaces}}</p>
             <button class="button" value="add"  v-on:Click="addItem">Add to Cart</button>
         </div>
-       
+        <div v-else> 
+            <h2>Checkout Page</h2>
+            <p><b>Firstname:</b></p><input type="text" id="firstname" v-model="order.firstname"/>  
+            <p><b>Lasttname:</b></p><input type="text" id="lastname" v-model="order.lastname"/>
+            <p><b>Address:</b></p><input type="text" id="address" v-model="order.address"/>
+            <p><b>City:</b></p><input type="text" id="city" v-model="order.city"/>
+            <p><b>Zip:</b></p><input type="text" id="zip" v-model="order.zip"/>
+            <p><b>State:</b></p><select v-model="order.state">
+                        <option disabled value="">State</option>
+                        <option v-for="(state, key) in states" v-bind:value ="state">{{key}}</option>
+            </select>
+                        <br/>
+                   <p><input type="checkbox" id="gift" value="true" v-model="order.gift"
+                        v-bind:true-value= "order.sendGift"
+                        v-bind:false-value= "order.dontsendGift"></p>
+                   <label for="gift">Ship as Gift?</label></p>
+    
+                   <p><input type="radio" id="home" value="Home" v-model="order.method">
+                   <label for="home">Home</label>
+    
+                   <p><input type="radio" id="business" value="Business" v-model="order.method">
+                   <label for="business">Business</label></p>
+                    <!--Button to submit form-->
+            <button v-on:click="SubmitForm">Place Order</button>
+                   <hr/>
+                   <br/>
+                   <h2>Order Information</h2>
+                   First name = {{order.firstname}} <br/>
+                   Last name = {{order.lastname}} <br/>
+                   Address = {{order.address}} <br/>
+                   City = {{order.city}} <br/>
+                   Zip = {{order.zip}} <br/>
+                   State = {{order.state}} <br/>
+                   Gift = {{order.gift}}
+        </div>
         </main>
         
 
