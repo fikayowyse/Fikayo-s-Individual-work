@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>After school lesoons</title>
+    <style>
+        main {
+            border: 1px solid #2566d4;
+            padding: 30px;
+            margin: 30px;
+            border-radius: 30px;
+            width: 250px;
+            display: grid;
+            grid-row-gap: 20px;
+
+
+        }
+
+        main button {
+            color: #333;
+            background-color: #2566d4;
+            color: white;
+            padding: 15px 10px;
+            border: none;
+            font-size: 20px;
+            line-height: 0.5em;
+            cursor: pointer;
+        }
+
+        main p {
+            font-size: 20px;
+            line-height: 0.5em;
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div id="app">   
+            <header>
+                <h1 v-text="sitename"></h1>
+            </header>
+            <figure>
+                <img v-bind:src ="Lessons.image"  alt="Maths.jpg" style="width: 130px; height: 140px;">
+            </figure>
+                <button v-on:click="showcheckout">
+                    {{cartItemCount}}
+                <span class="fas fa-cart-plus"></span>Checkout
+                </button>
+                
+            <div v-if="showproduct">
+                <p><strong>Subject:</strong> {{Lessons.subject}}</p>
+                <p><strong>Location:</strong> {{Lessons.location}}</p>
+                <p><strong>price: </strong> ${{Lessons.price}}</p>
+                <p><strong>Spaces:</strong> {{Lessons.spaces}}</p>
+                <button class="button" value="add"  v-on:Click="addItem">Add to Cart</button>
+            </main>
+            </div>
+    
+        </div>
+        <script>
+            var lessons = new Vue ({
+        el: "#app",
+        data: {
+            showproduct:true,
+            sitename: 'After School Lessons',
+            cart: [],
+            Lessons: {
+                id: 1,
+                subject: "Mathematics",
+                location: "London",
+                price: 100,
+                spaces: 5,
+                image: "images/Maths.jpg",
+                availableInventory: 5
+            }
+        },
+                   
+        methods: {
+            addItem: function() {
+                const btn = document.querySelector('.button');
+                this.cart.push(this.Lessons.id++); 
+                if(this.Lessons.spaces > 0){
+                   --this.Lessons.spaces
+                   this.Lessons.spaces              
+                }else{
+                    alert('No more available spaces')
+                }
+            },
+                showcheckout(){
+               this.showproduct = this.showproduct ? false: true;
+            }
+        },
+        computed: {
+            cartItemCount: function (){
+                return this.cart.length || '';
+            },
+            canaddtocart: function(){
+             return this.product.availableInventory > this.cartitemcount
+        } },
+    })
+    
+        </script>  
+</body>
+</html>
