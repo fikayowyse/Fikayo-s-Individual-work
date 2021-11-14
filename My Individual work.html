@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
     <title>After school lesoons</title>
     <style>
-        main {
+        main.Maths {
             border: 1px solid #2566d4;
             padding: 30px;
             margin: 30px;
@@ -39,72 +39,74 @@
     </style>
 </head>
 <body>
-    <main>
-        <div id="app">  
-             
-            <header>
-                <h1 v-text="sitename"></h1>
-            </header>
+    <main class="Maths">
+    <div id="app">   
+        <header>
+            <h1 v-text="sitename"></h1>
+        </header>
+        
+            <button v-on:click="showcheckout">
+                {{cartItemCount}}
+            <span class="fas fa-cart-plus"></span>Checkout
+            </button>
+       
+        <div v-if="showproduct">
             <figure>
                 <img v-bind:src ="Lessons.image"  alt="Maths.jpg" style="width: 130px; height: 140px;">
             </figure>
-                <button v-on:click="showcheckout">
-                    {{cartItemCount}}
-                <span class="fas fa-cart-plus"></span>Checkout
-                </button>
-                
-            <div v-if="showproduct">
-                <p><strong>Subject:</strong> {{Lessons.subject}}</p>
-                <p><strong>Location:</strong> {{Lessons.location}}</p>
-                <p><strong>price: </strong> ${{Lessons.price}}</p>
-                <p><strong>Spaces:</strong> {{Lessons.spaces}}</p>
-                <button class="button" value="add"  v-on:Click="addItem">Add to Cart</button>
-            </main>
-            </div>
-    
+            <p><strong>Subject:</strong> {{Lessons.subject}}</p>
+            <p><strong>Location:</strong> {{Lessons.location}}</p>
+            <p><strong>price: </strong> ${{Lessons.price}}</p>
+            <p><strong>Spaces:</strong> {{Lessons.spaces}}</p>
+            <button class="button" value="add"  v-on:Click="addItem">Add to Cart</button>
         </div>
-        <script>
-            var lessons = new Vue ({
-        el: "#app",
-        data: {
-            showproduct:true,
-            sitename: 'After School Lessons',
-            cart: [],
-            Lessons: {
-                id: 1,
-                subject: "Mathematics",
-                location: "London",
-                price: 100,
-                spaces: 5,
-                image: "images/Maths.jpg",
-                availableInventory: 5
+       
+        </main>
+        
+
+    </div>
+    <script>
+        var lessons = new Vue ({
+    el: "#app",
+    data: {
+        showproduct:true,
+        sitename: 'After School Lessons',
+        cart: [],
+        Lessons: {
+            id: 1,
+            subject: "Mathematics",
+            location: "London",
+            price: 100,
+            spaces: 5,
+            image: "images/Maths.jpg"
+        }
+    },
+               
+    methods: {
+        addItem: function() {
+            const btn = document.querySelector('.button');
+            this.cart.push(this.Lessons.id++); 
+            if(this.Lessons.spaces > 0){
+               --this.Lessons.spaces
+               this.Lessons.spaces              
+            }else{
+                alert('No more available spaces')
             }
         },
-                   
-        methods: {
-            addItem: function() {
-                const btn = document.querySelector('.button');
-                this.cart.push(this.Lessons.id++); 
-                if(this.Lessons.spaces > 0){
-                   --this.Lessons.spaces
-                   this.Lessons.spaces              
-                }else{
-                    alert('No more available spaces')
-                }
-            },
-                showcheckout(){
-               this.showproduct = this.showproduct ? false: true;
-            }
+            showcheckout(){
+           this.showproduct = this.showproduct ? false: true;
+        }
+    },
+    SubmitForm(){
+        alert("ordersubmitted!")
         },
-        computed: {
-            cartItemCount: function (){
-                return this.cart.length || '';
-            },
-            canaddtocart: function(){
-             return this.product.availableInventory > this.cartitemcount
-        } },
-    })
-    
-        </script>  
+    computed: {
+        cartItemCount: function (){
+            return this.cart.length || '';
+        },
+    }
+})
+
+    </script>   
 </body>
 </html>
