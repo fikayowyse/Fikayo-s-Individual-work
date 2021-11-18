@@ -12,7 +12,7 @@ let lessons = [
         "id" : 2,
         "subject": "Agriculture",
         "location": "California",
-        "price": 550,
+        "price": 150,
         "spaces": 5,
         "numberPurchased": 5,
         "image": "images//product-Agric.jpg"
@@ -21,7 +21,7 @@ let lessons = [
         "id" : 3,
         "subject": "Geography",
         "location": "Mumbai",
-        "price": 300,
+        "price": 150,
         "spaces": 5,
         "numberPurchased": 5,
         "image": "images//product-geo.jpg"
@@ -30,7 +30,7 @@ let lessons = [
         "id" : 4,
         "subject": "English",
         "location": "Lagos",
-        "price": 500,
+        "price": 250,
         "spaces": 5,
         "numberPurchased": 5,
         "image": "images//product-english.jpg"
@@ -39,7 +39,7 @@ let lessons = [
         "id" : 5,
         "subject": "Python",
         "location": "Indonisia",
-        "price": 199,
+        "price": 190,
         "spaces": 5,
         "numberPurchased": 5,
         "image": "images//Python.png"
@@ -48,7 +48,7 @@ let lessons = [
         "id" : 6,
         "subject": "Music",
         "location": "Nevada",
-        "price": 499,
+        "price": 100,
         "spaces": 5,
         "numberPurchased": 5,
         "image": "images//product-music.jpg"
@@ -57,7 +57,7 @@ let lessons = [
         "id" : 7,
         "subject": "Christian Religious Studies",
         "location": "London",
-        "price": 700,
+        "price": 110,
         "spaces": 5,
         "numberPurchased": 5,
         "image": "images//CRK.jpg"
@@ -66,7 +66,7 @@ let lessons = [
         "id" : 8,
         "subject": "Art",
         "location": "Florida",
-        "price": 69,
+        "price": 89,
         "spaces": 5,
         "numberPurchased": 5,
         "image": "images//Art.jpg"
@@ -75,7 +75,7 @@ let lessons = [
         "id" : 9,
         "subject": "BasketBall",
         "location": "Cairo",
-        "price": 299,
+        "price": 90,
         "spaces": 5,
         "numberPurchased": 5,
         "image": "images//product-bball.jpg"
@@ -84,7 +84,7 @@ let lessons = [
         "id" : 10,
         "subject": "Swimming",
         "location": "Dubai",
-        "price": 10_000,
+        "price": 90,
         "spaces": 5,
         "numberPurchased": 5,
         "image": "images//product-swim.jpg"
