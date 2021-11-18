@@ -4,161 +4,66 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
-    <title>After school lesoons</title>
-    <style>
-        main.Maths {
-            border: 1px solid #2566d4;
-            padding: 30px;
-            margin: 30px;
-            border-radius: 30px;
-            width: 250px;
-            display: grid;
-            grid-row-gap: 20px;
-
-
-        }
-
-        main button {
-            color: #333;
-            background-color: #2566d4;
-            color: white;
-            padding: 15px 10px;
-            border: none;
-            font-size: 20px;
-            line-height: 0.5em;
-            cursor: pointer;
-        }
-
-        main p {
-            font-size: 20px;
-            line-height: 0.5em;
-            font-family: sans-serif;
-        }
-    </style>
+    <title>After School Learning</title>
 </head>
 <body>
-    <main class="Maths">
-    <div id="app">   
-        <header>
-            <h1 v-text="sitename"></h1>
-        </header>
+    <div class="container" id="section1"> 
         
-            <button v-on:click="showcheckout">
-                {{cartItemCount}}
-            <span class="fas fa-cart-plus"></span>Checkout
-            </button>
-       
-        <div v-if="showproduct">
-            <figure>
-                <img v-bind:src ="Lessons.image"  alt="Maths.jpg" style="width: 130px; height: 140px;">
-            </figure>
-            <p><strong>Subject:</strong> {{Lessons.subject}}</p>
-            <p><strong>Location:</strong> {{Lessons.location}}</p>
-            <p><strong>price: </strong> ${{Lessons.price}}</p>
-            <p><strong>Spaces:</strong> {{Lessons.spaces}}</p>
-            <button class="button" value="add"  v-on:Click="addItem">Add to Cart</button>
+        <div class="header" >
+            <div class="sort" >
+                   <select name="sortBy" id="select" v-model="sortBy" >
+                    <option value="subject">Sort by Subject</option>
+                    <option value="location">Sort by Location</option>
+                    <option value="price">Sort by Price</option>
+                    <option value="availability">Sort by Availability</option>
+                    </select>
+                    <select name="orderby" id="orderBy" v-model="orderBy">
+                        <option value="ascending" >Ascending</option>
+                        <option value="descending">Descending</option>
+                    </select>
+                </div>
+
+                <form action="" class="search">
+                    <input type="text" v-model="searchValue"  placeholder="Search for a lesson"></a>
+                </form>
+
+                <button class="cart-btn" value="add" v-on:click="showCheckout">
+                    Cart&nbsp;&nbsp;&nbsp;
+                    <span class="fas fa-cart-plus"></span>
+                </button> 
+            <hr >      
+        </div>    
+        <div v-if='showProduct'>
+            <div class="section1">
+                <div v-for="lesson in sorted" :key="lesson.id" class="list">
+                        <img v-bind:src="lesson.image" alt="img" class="image">
+                        <p><strong>Subject: </strong>{{lesson.subject}}</p>
+                        <p><strong>Location: </strong>{{lesson.location}}</p>
+                        <p><strong>Price: </strong><i class="fa-solid fa-dollar-sign"></i> {{lesson.price}}.00</p>
+                        <p><strong>Available spaces: </strong>{{lesson.spaces}}</p>
+                        <button class="btn"  v-on:Click="addItem" >Add to Cart</button>
+                </div>
+            </div>
         </div>
-        <div v-else> 
-            <h2>Checkout Page</h2>
-            <p><b>Firstname:</b></p><input type="text" id="firstname" v-model="order.firstname"/>  
-            <p><b>Lasttname:</b></p><input type="text" id="lastname" v-model="order.lastname"/>
-            <p><b>Address:</b></p><input type="text" id="address" v-model="order.address"/>
-            <p><b>City:</b></p><input type="text" id="city" v-model="order.city"/>
-            <p><b>Zip:</b></p><input type="text" id="zip" v-model="order.zip"/>
-            <p><b>State:</b></p><select v-model="order.state">
-                        <option disabled value="">State</option>
-                        <option v-for="(state, key) in states" v-bind:value ="state">{{key}}</option>
-            </select>
-                        <br/>
-                   <p><input type="checkbox" id="gift" value="true" v-model="order.gift"
-                        v-bind:true-value= "order.sendGift"
-                        v-bind:false-value= "order.dontsendGift"></p>
-                   <label for="gift">Ship as Gift?</label></p>
-    
-                   <p><input type="radio" id="home" value="Home" v-model="order.method">
-                   <label for="home">Home</label>
-    
-                   <p><input type="radio" id="business" value="Business" v-model="order.method">
-                   <label for="business">Business</label></p>
-                    <!--Button to submit form-->
-            <button v-on:click="SubmitForm">Place Order</button>
-                   <hr/>
-                   <br/>
-                   <h2>Order Information</h2>
-                   First name = {{order.firstname}} <br/>
-                   Last name = {{order.lastname}} <br/>
-                   Address = {{order.address}} <br/>
-                   City = {{order.city}} <br/>
-                   Zip = {{order.zip}} <br/>
-                   State = {{order.state}} <br/>
-                   Gift = {{order.gift}}
+
+        <div v-else>
+
+            <div class="checkout">
+                <input type="text" placeholder="Name" id="name" v-model.trim ="checkout.name" />
+                <input type="number" placeholder="Phone Number" id="pNo" v-model ="checkout.pNo" />
+                <button type="submit" id="btnSub">Checkout</button>
+            </div>
         </div>
-        </main>
-        
+            
 
     </div>
-    <script>
-        var lessons = new Vue ({
-    el: "#app",
-    data: {
-        showproduct:true,
-        sitename: 'After School Lessons',
-        cart: [],
-        order:{
-        firstname: "",
-        lastname: "",
-        Address: "",
-        City: "",
-        Zip: "",
-        State: "",
-        method: "Home",
-        gift: "",
-        sendGift: "Send package as gift",
-        dontsendGift: "Do not send as gift"
-        },
-        states:{
-        AL:"Alabama",
-        AR:"Arizona",
-        CA:"California",
-        NV:"Nevada"
-        },
-        Lessons: {
-            id: 1,
-            subject: "Mathematics",
-            location: "London",
-            price: 100,
-            spaces: 5,
-            image: "images/Maths.jpg"
-        }
-    },
-               
-    methods: {
-        addItem: function() {
-            const btn = document.querySelector('.button');
-            this.cart.push(this.Lessons.id++); 
-            if(this.Lessons.spaces > 0){
-               --this.Lessons.spaces
-               this.Lessons.spaces              
-            }else{
-                alert('No more available spaces')
-            }
-        },
-            showcheckout(){
-           this.showproduct = this.showproduct ? false: true;
-        }
-    },
-    SubmitForm(){
-        alert("ordersubmitted!")
-        },
-    computed: {
-        cartItemCount: function (){
-            return this.cart.length || '';
-        },
-    }
-})
+    
 
-    </script>   
+
+    <script src="lessons.js"></script>
+	<script src="app.js"></script>
 </body>
 </html>
