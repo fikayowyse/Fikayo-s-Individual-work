@@ -10,7 +10,7 @@
     <title>After School Learning</title>
 </head>
 <body>
-    <div class="container" id="section1"> 
+    <div class="container" id="app"> 
         
         <div class="header" >
             <div class="sort" >
@@ -34,17 +34,17 @@
                     Cart&nbsp;&nbsp;&nbsp;
                     <span class="fas fa-cart-plus"></span>
                 </button> 
-            <hr >      
+                <br><br>     
         </div>    
         <div v-if='showProduct'>
-            <div class="section1">
-                <div v-for="lesson in sorted" :key="lesson.id" class="list">
+            <div class="courses">
+                <div v-for="lesson in sorted" :key="lesson.id" class="course">
                         <img v-bind:src="lesson.image" alt="img" class="image">
                         <p><strong>Subject: </strong>{{lesson.subject}}</p>
                         <p><strong>Location: </strong>{{lesson.location}}</p>
                         <p><strong>Price: </strong><i class="fa-solid fa-dollar-sign"></i> {{lesson.price}}.00</p>
                         <p><strong>Available spaces: </strong>{{lesson.spaces}}</p>
-                        <button class="btn"  v-on:Click="addItem" >Add to Cart</button>
+                        <button class="btn"  v-on:Click="addCourse" >Add to Cart</button>
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
 var store = new Vue ({
-    el: '#section1',
+    el: '#app',
     data: {
         showProduct: true,
         sitename: 'After School Lessons',
@@ -15,7 +15,7 @@ var store = new Vue ({
     },
                
     methods: {
-        addItem: function() {
+        addCourse: function() {
             console.log(this.lessons.id)
         },
         showCheckout(){
@@ -24,7 +24,7 @@ var store = new Vue ({
 
     },
     computed: {
-        cartItemCount: function (){
+        cartProductCount: function (){
             return this.cart.length || '';
         },
         sorted() {
