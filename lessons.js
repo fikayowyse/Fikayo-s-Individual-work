@@ -6,6 +6,7 @@ let lessons = [
         "price": 250,
         "spaces": 5,
         "numberPurchased": 5,
+        "availableInventory" : 5,
         "image": "images//Maths.jpg"
     },
     {
@@ -15,6 +16,7 @@ let lessons = [
         "price": 150,
         "spaces": 5,
         "numberPurchased": 5,
+        "availableInventory" : 5,
         "image": "images//product-Agric.jpg"
   },
   {
@@ -24,6 +26,7 @@ let lessons = [
         "price": 150,
         "spaces": 5,
         "numberPurchased": 5,
+        "availableInventory" : 5,
         "image": "images//product-geo.jpg"
     },
     {
@@ -33,6 +36,7 @@ let lessons = [
         "price": 250,
         "spaces": 5,
         "numberPurchased": 5,
+        "availableInventory" : 5,
         "image": "images//product-english.jpg"
     },
     {
@@ -42,6 +46,7 @@ let lessons = [
         "price": 190,
         "spaces": 5,
         "numberPurchased": 5,
+        "availableInventory" : 5,
         "image": "images//Python.png"
     },
     {
@@ -51,6 +56,7 @@ let lessons = [
         "price": 100,
         "spaces": 5,
         "numberPurchased": 5,
+        "availableInventory" : 5,
         "image": "images//product-music.jpg"
     },
     {
@@ -60,6 +66,7 @@ let lessons = [
         "price": 110,
         "spaces": 5,
         "numberPurchased": 5,
+        "availableInventory" : 5,
         "image": "images//CRK.jpg"
     },
     {
@@ -69,6 +76,7 @@ let lessons = [
         "price": 89,
         "spaces": 5,
         "numberPurchased": 5,
+        "availableInventory" : 5,
         "image": "images//Art.jpg"
     },
     {
@@ -78,6 +86,7 @@ let lessons = [
         "price": 90,
         "spaces": 5,
         "numberPurchased": 5,
+        "availableInventory" : 5,
         "image": "images//product-bball.jpg"
     },
     {
@@ -87,6 +96,7 @@ let lessons = [
         "price": 90,
         "spaces": 5,
         "numberPurchased": 5,
+        "availableInventory" : 5,
         "image": "images//product-swim.jpg"
     }
 ]

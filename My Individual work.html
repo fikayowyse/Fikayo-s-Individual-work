@@ -30,11 +30,15 @@
                     <input type="text" v-model="searchValue"  placeholder="Search for a lesson"></a>
                 </form>
 
-                <button class="cart-btn" value="add" v-on:click="showCheckout">
-                    Cart&nbsp;&nbsp;&nbsp;
-                    <span class="fas fa-cart-plus"></span>
+                <button class="cart-btn" value="add" v-if="cart.length === 0 && showProduct !== false" disabled>
+                    Cart&nbsp;&nbsp;{{cartItemCount}}&nbsp;
+                    <span class="fas fa-cart-plus"></span>                    
                 </button> 
-                <br><br>     
+                <button class="cart-btn" value="add" v-on:click="showCheckout" v-else>
+                    Cart&nbsp;&nbsp;{{cartItemCount}}&nbsp;
+                    <span class="fas fa-cart-plus"></span>                    
+                </button> 
+            <hr >     
         </div>    
         <div v-if='showProduct'>
             <div class="courses">
@@ -44,7 +48,11 @@
                         <p><strong>Location: </strong>{{lesson.location}}</p>
                         <p><strong>Price: </strong><i class="fa-solid fa-dollar-sign"></i> {{lesson.price}}.00</p>
                         <p><strong>Available spaces: </strong>{{lesson.spaces}}</p>
-                        <button class="btn"  v-on:Click="addCourse" >Add to Cart</button>
+                        <button class="btn"  v-on:click="addCourse(lesson)" v-if='canAddToCart(lesson)'>Add to Cart</button>
+                        <button disabled ='disabled' v-else>Add to Cart</button>
+                        <span v-if="lesson.availableInventory === cartCount(lesson.id)">
+                            Sold out!
+                        </span>
                 </div>
             </div>
         </div>
@@ -52,9 +60,20 @@
         <div v-else>
 
             <div class="checkout">
-                <input type="text" placeholder="Name" id="name" v-model.trim ="checkout.name" />
-                <input type="number" placeholder="Phone Number" id="pNo" v-model ="checkout.pNo" />
-                <button type="submit" id="btnSub">Checkout</button>
+                <div class="section1">
+                    <div v-for="lesson in cart" class="course">
+                        <img v-bind:src="lesson.image" alt="img" class="image">
+                        <p><strong>Subject: </strong>{{lesson.subject}}</p>
+                        <p><strong>Location: </strong>{{lesson.location}}</p>
+                        <p><strong>Price: </strong><i class="fa-solid fa-dollar-sign"></i> {{lesson.price}}.00</p>
+                        <button class="btn" v-on:click="removeFromCart(lesson)">Remove</button>
+                    </div>
+                </div>
+                <div class="submit">                    
+                    <input type="text" placeholder="Name" id="letters" v-model.trim ="checkout.Name" />
+                    <input type="text" name="pNo" placeholder="Phone Number" id="pNo" v-model ="checkout.Phone_No" />
+                    <button type="submit" class="submitBtn" id="btnSub" v-on:click="isNumber" >Checkout</button>
+                </div>
             </div>
         </div>
             

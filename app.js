@@ -9,24 +9,62 @@ var store = new Vue ({
         searchValue: '',
         Lessons: lessons,  
         checkout: {
-            name: "",
-            pNo: null,
+            Name: "",
+            Phone_No: null,
         } ,   
     },
                
     methods: {
-        addCourse: function() {
-            console.log(this.lessons.id)
+        addCourse: function (lesson) {
+            this.cart.push(lesson)
+            if(lesson.spaces > 0){
+               --lesson.spaces    
+            }
+        },
+        canAddToCart: function(lesson){
+          return lesson.availableInventory > this.cartCount(lesson);
+        },
+        removeFromCart(lesson) {
+            this.cart.splice(this.cart.indexOf(lesson.id));            
+            ++lesson.spaces   
         },
         showCheckout(){
             this.showProduct = this.showProduct ? false : true;
         },
+        cartCount(id){
+            let count = 0;
+            for (let i = 0; i < this.cart.length; i++){
+                if(this.cart[i] === id){
+                    count++
+                }
+            }
+            return count;
+        },        
+        isNumber() {
+            let num = document.getElementById("pNo")
+            let lett = document.getElementById("letters")
+            let submitBtn = document.querySelector(".submitBtn")
+            var integers = /^[0-9]+$/
+            var letters = /^[A-Za-z]+$/
+            if(num.value.match(integers) && lett.value.match(letters)){                
+                alert('Your Registration number has accepted....');
+                window.location.href = "\index.html"
+                return true;
+            }
+            else{
+                alert('Please input only numeric characters for Phone number and letters for Name');
+
+                return false;
+            }
+        },
 
     },
     computed: {
-        cartProductCount: function (){
-            return this.cart.length || '';
+
+        cartItemCount: function(){
+            return this.cart.length;
         },
+        
         sorted() {
             let sortLessons = this.Lessons;       
      
